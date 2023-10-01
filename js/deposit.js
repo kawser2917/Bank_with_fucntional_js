@@ -1,30 +1,38 @@
+function getInputFieldValueById(input){
+     const depositAmountField = document.getElementById(input)
+     const depositAmountString = depositAmountField.value
+     const depositAmount = parseFloat(depositAmountString)
+     return depositAmount
+
+}
+
+function getElementValueById(elementId){
+     const element = document.getElementById(elementId)
+     const elementString = element.innerText
+     const Value = parseFloat(elementString)
+     return Value
+}
+
+function setElementByid(elementId, value){
+     const element = document.getElementById(elementId)
+     element.innerText = value
+}
+
+
+
 document.getElementById("btn-deposit").addEventListener("click", function(){
-     const depositAmountField = document.getElementById("deposit-amount")
-     const newDepositAmountString = depositAmountField.value
-     const newDepositAmount = parseFloat(newDepositAmountString)
-     console.log(newDepositAmount)
+     const newDepositAmount = getInputFieldValueById("deposit-amount")
+     const previousDepositAmount = getElementValueById("total-deposit")
+     const totalBalance = getElementValueById("total-balance")
 
-     const previousDepositAmountElement = document.getElementById("total-deposit")
-     const previousDepositAmountElementString = previousDepositAmountElement.innerText
-     const previousDepositAmount = parseFloat(previousDepositAmountElementString)
-     console.log(previousDepositAmount)
+     const newTotalBalance = totalBalance + newDepositAmount
 
-     const currentDepositAmount = previousDepositAmount + newDepositAmount
-     console.log(currentDepositAmount)
-     previousDepositAmountElement.innerText = currentDepositAmount
+     const currentDepositAmount = newDepositAmount + previousDepositAmount
+     setElementByid("total-deposit", currentDepositAmount)
+     setElementByid('total-balance',newTotalBalance)
 
 
 
 
-     const previousTotalBalanceElement = document.getElementById("total-balance")
-     const previousTotalBalanceString = previousTotalBalanceElement.innerText
-     const previousTotalBalance = parseFloat(previousTotalBalanceString)
-
-     const newTotalBalance = previousTotalBalance + newDepositAmount
-     previousTotalBalanceElement.innerText = newTotalBalance
-
-     depositAmountField.value =  ``
-
-  
 
 })
